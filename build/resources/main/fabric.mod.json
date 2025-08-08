@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "manifold",
+  "version": "7.49-MC1.21.8",
+  "name": "maniFold Client",
+  "description": "maniFold maniFold maniFold!",
+  "authors": [
+    "Alexander01998"
+  ],
+  "contact": {
+    "homepage": "https://www.maniFoldclient.net/modmenu-homepage/",
+    "sources": "https://www.maniFoldclient.net/modmenu-sources/",
+    "issues": "https://www.maniFoldclient.net/modmenu-issues/"
+  },
+  "license": "GPL-3.0-or-later",
+  "icon": "assets/maniFold/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "net.maniFoldclient.maniFoldInitializer",
+      "net.maniFoldclient.test.maniFoldE2ETestClient"
+    ]
+  },
+  "mixins": [
+    "manifold.mixins.json"
+  ],
+  "accessWidener": "manifold.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.16.13",
+    "fabric-api": ">=0.126.1",
+    "minecraft": "~1.21.6-beta.3",
+    "java": ">=21"
+  },
+  "suggests": {
+    "mo_glass": "*"
+  },
+  "breaks": {
+    "wi_zoom": "*",
+    "wi-zoom": "*",
+    "vulkanmod": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.donate": "https://www.maniFoldclient.net/modmenu-donate/",
+        "modmenu.twitter": "https://www.maniFoldclient.net/modmenu-twitter/",
+        "modmenu.wiki": "https://www.maniFoldclient.net/modmenu-wiki/",
+        "Forum": "https://www.maniFoldclient.net/modmenu-forum/"
+      }
+    }
+  }
+}

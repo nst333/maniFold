@@ -1,0 +1,62 @@
+{
+  "Blocks": {
+    "x": 5,
+    "y": 5,
+    "minimized": true,
+    "pinned": false
+  },
+  "Movement": {
+    "x": 76,
+    "y": 5,
+    "minimized": true,
+    "pinned": false
+  },
+  "Combat": {
+    "x": 151,
+    "y": 5,
+    "minimized": true,
+    "pinned": false
+  },
+  "Render": {
+    "x": 225,
+    "y": 5,
+    "minimized": true,
+    "pinned": false
+  },
+  "Chat": {
+    "x": 306,
+    "y": 5,
+    "minimized": true,
+    "pinned": false
+  },
+  "Fun": {
+    "x": 383,
+    "y": 5,
+    "minimized": true,
+    "pinned": false
+  },
+  "Items": {
+    "x": 445,
+    "y": 5,
+    "minimized": true,
+    "pinned": false
+  },
+  "Other": {
+    "x": 518,
+    "y": 5,
+    "minimized": true,
+    "pinned": false
+  },
+  "UI Settings": {
+    "x": 592,
+    "y": 5,
+    "minimized": true,
+    "pinned": false
+  },
+  "Radar": {
+    "x": 690,
+    "y": 5,
+    "minimized": false,
+    "pinned": true
+  }
+}
