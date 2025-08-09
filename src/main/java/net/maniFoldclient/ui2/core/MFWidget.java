@@ -1,6 +1,7 @@
 package net.maniFoldclient.ui2.core;
 
-import net.minecraft.client.gui.DrawContext;.client.gui.DrawContext;
+import net.minecraft.client.gui.DrawContext;
+
 
 public abstract class MFWidget {
     protected int x, y, w, h;
@@ -24,15 +25,19 @@ public abstract class MFWidget {
     public boolean mouseClicked(double mx, double my, int button) {
         return false;
     }
+
     public boolean mouseReleased(double mx, double my, int button) {
         return false;
     }
+
     public boolean mouseScrolled(double mx, double my, double amount) {
         return false;
     }
+
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         return false;
     }
+
     public boolean charTyped(char chr, int modifiers) {
         return false;
     }
