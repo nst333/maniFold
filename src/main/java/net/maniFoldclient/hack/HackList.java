@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -198,6 +195,8 @@ public final class HackList implements UpdateListener
 	
 	private final EventManager eventManager =
 		maniFoldClient.INSTANCE.getEventManager();
+
+	public static HackList INSTANCE;
 	
 	public HackList(Path enabledHacksFile)
 	{
@@ -222,6 +221,8 @@ public final class HackList implements UpdateListener
 		}
 		
 		eventManager.add(UpdateListener.class, this);
+
+		INSTANCE = this;
 	}
 	
 	@Override
@@ -229,6 +230,55 @@ public final class HackList implements UpdateListener
 	{
 		enabledHacksFile.load(this);
 		eventManager.remove(UpdateListener.class, this);
+	}
+
+	public static HackList getInstance() { return INSTANCE; }
+
+	public Stream<Hack> stream() {
+		try {
+			List<Stream<Hack>> streams = new ArrayList<>();
+
+			for (Field f : this.getClass().getDeclaredFields()) {
+				f.setAccessible(true);
+				Object v = f.get(this);
+				if (v == null) continue;
+
+				Class<?> ft = f.getType();
+
+				// 1) 단일 Hack 필드
+				if (Hack.class.isAssignableFrom(ft)) {
+					streams.add(Stream.of((Hack) v));
+					continue;
+				}
+
+				// 2) Hack[] 배열
+				if (ft.isArray() && Hack.class.isAssignableFrom(ft.getComponentType())) {
+					streams.add(Arrays.stream((Hack[]) v));
+					continue;
+				}
+
+				// 3) Collection (List/Set 등) - Iterable 직접 사용 안 함
+				if (v instanceof Collection<?> c) {
+					streams.add(c.stream()
+							.filter(Hack.class::isInstance)
+							.map(Hack.class::cast));
+					continue;
+				}
+
+				// 4) Map<?, ?> 값 쪽에서 Hack 수집
+				if (v instanceof Map<?, ?> m) {
+					streams.add(m.values().stream()
+							.filter(Hack.class::isInstance)
+							.map(Hack.class::cast));
+				}
+			}
+
+			// 모두 합치고 중복 제거
+			return streams.stream().reduce(Stream.empty(), Stream::concat).distinct();
+
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException("HackList reflection stream() failed", e);
+		}
 	}
 	
 	public void saveEnabledHax()
